@@ -1,23 +1,44 @@
-﻿using MVC_FUT_NFL.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MVC_FUT_NFL.Models;
 
 namespace MVC_FUT_NFL.Data
 {
-    public class CatalogoDAO:IDisposable
+    public class RelJugadoresEquipoDAO:IDisposable
     {
         NflBdContext db = new NflBdContext();
         private bool disposedValue;
 
-        public List<Estadio> ListarEstadios()
+        public int Agregar(RelJugadoresEquipo rjl)
         {
-            return db.Estadios.ToList();
+            db.RelJugadoresEquipos.Add(rjl);
+            return db.SaveChanges();
         }
-        public List<Equipo> ListarEquipos()
+        public int Editar(RelJugadoresEquipo rjl)
         {
-            return db.Equipos.ToList();
+            db.RelJugadoresEquipos.Update(rjl);
+            return db.SaveChanges();
         }
-        public List<Jugadore> ListarJugadores()
+        public int Eliminar(int idrjl)
         {
-            return db.Jugadores.ToList();
+            var query = db.RelJugadoresEquipos.Where(r => r.IdEquipo == idrjl).SingleOrDefault();
+            db.RelJugadoresEquipos.Remove(query);
+            return db.SaveChanges();
+        }
+        public RelJugadoresEquipo Buscar(int idrjl)
+        {
+            Listar(); // para que muestre en detalel
+            var query = db.RelJugadoresEquipos.Where(r => r.IdEquipo == idrjl).SingleOrDefault();
+            return query;
+        }
+        public List<RelJugadoresEquipo> Listar()
+        {
+            // Incluye las propiedades de navegación
+            var query = db.RelJugadoresEquipos
+                .Include(r => r.IdEquipoNavigation)
+                .Include(r => r.IdJugadorNavigation)
+                .ToList();
+
+            return query;
         }
 
         protected virtual void Dispose(bool disposing)
@@ -36,7 +57,7 @@ namespace MVC_FUT_NFL.Data
         }
 
         // // TODO: reemplazar el finalizador solo si "Dispose(bool disposing)" tiene código para liberar los recursos no administrados
-        // ~CatalogoDAO()
+        // ~RelJugadoresEquipoDAO()
         // {
         //     // No cambie este código. Coloque el código de limpieza en el método "Dispose(bool disposing)".
         //     Dispose(disposing: false);

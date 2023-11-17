@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MVC_FUT_NFL.Models.RelJugadoresEquipo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Agregar">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Equipo
+            </th>
+            <th>
+                Jugador
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEquipoNavigation.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdJugadorNavigation.NombreCompleto)
+            </td>
+            <td>
+                    <a asp-action="Editar" asp-route-id="@item.IdJugador">Edit</a> |
+                    <a asp-action="Detalle" asp-route-id="@item.IdJugador">Details</a> |
+                    <a asp-action="Eliminar" asp-route-id="@item.IdJugador">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
