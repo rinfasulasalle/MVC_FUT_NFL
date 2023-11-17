@@ -20,14 +20,14 @@ namespace MVC_FUT_NFL.Data
         }
         public int Eliminar(int idrjl)
         {
-            var query = db.RelJugadoresEquipos.Where(r => r.IdEquipo == idrjl).SingleOrDefault();
+            var query = db.RelJugadoresEquipos.Where(r => r.IdJugador == idrjl).SingleOrDefault();
             db.RelJugadoresEquipos.Remove(query);
             return db.SaveChanges();
         }
         public RelJugadoresEquipo Buscar(int idrjl)
         {
             Listar(); // para que muestre en detalel
-            var query = db.RelJugadoresEquipos.Where(r => r.IdEquipo == idrjl).SingleOrDefault();
+            var query = db.RelJugadoresEquipos.Where(r => r.IdJugador == idrjl).SingleOrDefault();
             return query;
         }
         public List<RelJugadoresEquipo> Listar()

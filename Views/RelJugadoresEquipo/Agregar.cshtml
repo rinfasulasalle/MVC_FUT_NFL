@@ -1,0 +1,41 @@
+﻿@model MVC_FUT_NFL.Models.RelJugadoresEquipo
+
+@{
+    ViewData["Title"] = "Agregar";
+}
+
+<h1>Agregar</h1>
+
+<h4>RelJugadoresEquipo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Agregar">
+            <div asp-validation-summary="ModelOnly" class="text-danger">AAA</div>
+            <div class="form-group">
+                <label asp-for="IdJugador" class="control-label">Jugador</label>
+                <select asp-for="IdJugador" class="form-control" id="ddlIdJugador"
+                        asp-items="@(new SelectList(ViewBag.IdJugadore,"Id","NombreCompleto"))"></select>
+                <span asp-validation-for="IdJugador" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdEquipo" class="control-label">Equipo</label>
+                <select asp-for="IdEquipo" class="form-control" id="ddlIdEquipo"
+                        asp-items="@(new SelectList(ViewBag.IdEquipo,"Id","Nombre"))"></select>
+                <span asp-validation-for="IdEquipo" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
