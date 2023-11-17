@@ -1,0 +1,58 @@
+﻿@model MVC_FUT_NFL.Models.Partido
+
+@{
+    ViewData["Title"] = "Agregar";
+}
+
+<h1>Agregar</h1>
+
+<h4>Partido</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Agregar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdEstadio" class="control-label">Estadio</label>
+                <select asp-for="IdEstadio" class="form-control" id="ddlIdEstadio"
+                        asp-items="@(new SelectList(ViewBag.IdEstadio,"Id","Nombre"))"></select>
+                <span asp-validation-for="IdEstadio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdEquipo1" class="control-label">Equipo 1</label>
+                <select asp-for="IdEquipo1" class="form-control" id="ddlIdEstadio"
+                        asp-items="@(new SelectList(ViewBag.IdEquipo,"Id","Nombre"))"></select>
+                <span asp-validation-for="IdEquipo1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdEquipo2" class="control-label">Equipo 2</label>
+                <select asp-for="IdEquipo2" class="form-control" id="ddlIdEstadio"
+                        asp-items="@(new SelectList(ViewBag.IdEquipo,"Id","Nombre"))"></select>                    <span asp-validation-for="IdEquipo2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fecha" class="control-label"></label>
+                <input asp-for="Fecha" class="form-control" />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo" class="control-label">Tipo</label>
+                <select asp-for="Tipo" class="form-control">
+                    <option value="Normal">Normal</option>
+                    <option value="Playoffs">Playoffs</option>
+                </select>
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
