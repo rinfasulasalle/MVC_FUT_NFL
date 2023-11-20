@@ -1,0 +1,28 @@
+﻿@model IEnumerable<MVC_FUT_NFL.Models.Noticia>
+
+@{
+    ViewData["Title"] = "Noticias";
+}
+
+<div class="container mt-5">
+    <h1>Últimas Noticias</h1>
+
+    <div class="row mt-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6">
+                <div class="card mb-4 shadow-sm">
+                    <img src="@item.UrlImgNoticia" class="card-img-top" alt="Imagen de la noticia">
+
+                    <div class="card-body">
+                        <h5 class="card-title">@item.TituloNoticia</h5>
+                        <p class="card-text">@item.ContenidoNoticia</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<p>
+    <a asp-action="Admin">Create New</a>
+</p>

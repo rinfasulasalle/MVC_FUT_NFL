@@ -1,0 +1,30 @@
+﻿@model MVC_FUT_NFL.Models.Noticia
+
+<div>
+    <h4>Noticia</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TituloNoticia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TituloNoticia)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ContenidoNoticia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ContenidoNoticia)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UrlImgNoticia)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Html.Raw(Model.UrlImgNoticia)" alt="Imagen de la noticia" width="300" height="200">
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
