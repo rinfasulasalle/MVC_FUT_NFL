@@ -36,7 +36,6 @@ namespace MVC_FUT_NFL.Data
                 .Include(p => p.IdEquipo1Navigation)
                 .Include(p => p.IdEquipo2Navigation)
                 .Include(p => p.IdEstadioNavigation)
-                .Take(100)
                 .ToList();
 
             return query;

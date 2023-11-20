@@ -1,27 +1,43 @@
-﻿using MVC_FUT_NFL.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MVC_FUT_NFL.Models;
 
 namespace MVC_FUT_NFL.Data
 {
-    public class CatalogoDAO:IDisposable
+    public class ResultadoDAO:IDisposable
     {
         NflBdContext db = new NflBdContext();
         private bool disposedValue;
 
-        public List<Estadio> ListarEstadios()
+        public int Agregar(Resultado resultado)
         {
-            return db.Estadios.ToList();
+            db.Resultados.Add(resultado);
+            return db.SaveChanges();
         }
-        public List<Equipo> ListarEquipos()
+        public int Editar(Resultado resultado)
         {
-            return db.Equipos.ToList();
+            db.Resultados.Update(resultado);
+            return db.SaveChanges();
         }
-        public List<Jugadore> ListarJugadores()
+        public int Eliminar(int idresultado)
         {
-            return db.Jugadores.ToList();
+            var query = db.Resultados.Where(r => r.Id == idresultado).SingleOrDefault();
+            db.Resultados.Remove(query);
+            return db.SaveChanges();
         }
-        public List<Partido> ListarPartidos()
+        public Resultado Buscar(int idresultado)
         {
-            return db.Partidos.ToList();
+            var query = db.Resultados.Where(r => r.Id == idresultado).SingleOrDefault();
+            return query;
+        }
+        public List<Resultado> Listar()
+        {
+            var query = db.Resultados
+                .Include(r => r.IdPartidoNavigation)
+                    .ThenInclude(p => p.IdEquipo1Navigation) // Incluir el equipo1 del partido
+                .Include(r => r.IdPartidoNavigation)
+                    .ThenInclude(p => p.IdEquipo2Navigation) // Incluir el equipo2 del partido
+                .ToList();
+            return query;
         }
 
         protected virtual void Dispose(bool disposing)
@@ -40,7 +56,7 @@ namespace MVC_FUT_NFL.Data
         }
 
         // // TODO: reemplazar el finalizador solo si "Dispose(bool disposing)" tiene código para liberar los recursos no administrados
-        // ~CatalogoDAO()
+        // ~ResultadoDAO()
         // {
         //     // No cambie este código. Coloque el código de limpieza en el método "Dispose(bool disposing)".
         //     Dispose(disposing: false);
