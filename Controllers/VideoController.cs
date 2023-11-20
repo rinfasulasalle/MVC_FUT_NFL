@@ -93,6 +93,7 @@ namespace MVC_FUT_NFL.Controllers
             using (CatalogoDAO db = new CatalogoDAO())
             {
                 ViewBag.IdPartido = db.ListarPartidos();
+                ViewBag.IdEquipo = db.ListarEquipos();
             }
         }
     }

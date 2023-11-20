@@ -35,6 +35,9 @@ namespace MVC_FUT_NFL.Data
         {
             var query = db.Videos
                 .Include(r => r.IdPartidoNavigation)
+                    .ThenInclude(p => p.IdEquipo1Navigation) // Incluir el equipo1 del partido
+                .Include(r => r.IdPartidoNavigation)
+                    .ThenInclude(p => p.IdEquipo2Navigation) // Incluir el equipo2 del partido
                 .ToList();
             return query;
         }

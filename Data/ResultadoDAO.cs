@@ -28,7 +28,7 @@ namespace MVC_FUT_NFL.Data
         {
             var query = db.Resultados.Where(r => r.Id == idresultado).SingleOrDefault();
             return query;
-        }
+        } 
         public List<Resultado> Listar()
         {
             var query = db.Resultados

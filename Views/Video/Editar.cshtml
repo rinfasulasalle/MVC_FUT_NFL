@@ -15,7 +15,7 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="IdPartido" class="control-label"> Partido</label>
-                <select asp-for="IdPartido" class="form-control" id="ddlIdPartido"
+                <select disabled asp-for="IdPartido" class="form-control" id="ddlIdPartido"
                         asp-items="@(new SelectList(ViewBag.IdPartido,"Id","Id"))"></select>
                 <span asp-validation-for="IdPartido" class="text-danger"></span>
             </div>
