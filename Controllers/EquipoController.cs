@@ -86,5 +86,16 @@ namespace MVC_FUT_NFL.Controllers
                 return View(equipo);
             }
         }
+        [HttpGet]
+        public IActionResult Tabla()
+        {
+            using (EquipoDAO db = new EquipoDAO())
+            {
+                // Obtener la lista de equipos y ordenarla por puntaje de mayor a menor
+                var equiposOrdenados = db.Listar().OrderByDescending(equipo => equipo.Puntuacion).ToList();
+                return View(equiposOrdenados);
+            }
+        }
+
     }
 }

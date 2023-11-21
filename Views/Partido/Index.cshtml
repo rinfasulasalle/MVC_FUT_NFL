@@ -4,56 +4,51 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Calendario de Partidos</h1>
+
+<div id="calendar"></div>
+
+@section scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/locale/es.js"></script> <!-- Archivo de idioma en español -->
+
+    <script>
+        $(document).ready(function () {
+            // Obtén los datos de los partidos
+            var eventos = [
+        @foreach (var item in Model)
+        {
+            <text>
+                    {
+                        title: '@Html.DisplayFor(modelItem => item.Tipo)',
+                        start: '@string.Format("{0:yyyy-MM-ddTHH:mm:ss}", item.Fecha)',
+                        end: '@string.Format("{0:yyyy-MM-ddTHH:mm:ss}", item.Fecha)',
+                        description: '@Html.DisplayFor(modelItem => item.IdEquipo1Navigation.Nombre) vs @Html.DisplayFor(modelItem => item.IdEquipo2Navigation.Nombre)'
+                    },
+            </text>
+        }
+                    ];
+
+            // Inicializa el calendario
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                events: eventos,
+                eventRender: function (event, element) {
+                    element.attr('title', event.description);
+                },
+                locale: 'es' // idioma a español
+            });
+        });
+    </script>
+}
 
 <p>
-    <a asp-action="Agregar">Create New</a>
+    <a asp-action="Admin">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tipo)
-            </th>
-            <th>
-                Equipo Uno
-            </th>
-            <th>
-                Equipo Dos
-            </th>
-            <th>
-                Estadio
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tipo)
-            </td>
-            <td>
-                    @Html.DisplayFor(modelItem => item.IdEquipo1Navigation.Nombre)
-            </td>
-            <td>
-                    @Html.DisplayFor(modelItem => item.IdEquipo2Navigation.Nombre)
-            </td>
-            <td>
-                    @Html.DisplayFor(modelItem => item.IdEstadioNavigation.Nombre)
-            </td>
-            <td>
-                    <a asp-action="Editar" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Detalle" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Eliminar" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>

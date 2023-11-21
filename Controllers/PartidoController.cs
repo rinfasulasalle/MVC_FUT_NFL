@@ -95,5 +95,13 @@ namespace MVC_FUT_NFL.Controllers
 
             }
         }
+        [HttpGet]
+        public IActionResult Admin()
+        {
+            using (PartidoDAO db = new PartidoDAO())
+            {
+                return View(db.Listar());
+            }
+        }
     }
 }
