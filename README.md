@@ -6,8 +6,8 @@ El proyecto "MVC_FUT_NFL" es una aplicación basada en el patrón de diseño Modelo
 
 ## Tecnologías Utilizadas
 
-- ASP.NET MVC [Versión]
-- [Otras tecnologías utilizadas]
+- ASP.NET MVC 7.0
+- EntityFramework para SQL Server
 
 ## Estructura del Proyecto
 
@@ -16,17 +16,14 @@ Describe la estructura principal del proyecto y la funcionalidad de cada compone
 ```plaintext
 MVC_FUT_NFL/
 |-- Controllers/
+|-- Data/
 |-- Models/
 |-- Views/
 |-- ...
 |-- appsettings.json
-|-- Startup.cs
+|-- Program.cs
 |-- ...
 ```
-
-## Configuración
-
-Explica cualquier configuración importante que deba realizarse antes de ejecutar la aplicación. Esto podría incluir configuraciones de base de datos, configuraciones de terceros, etc.
 
 ## Instalación
 
@@ -43,15 +40,6 @@ Explica cualquier configuración importante que deba realizarse antes de ejecutar
    ```bash
    dotnet restore
    ```
-
-## Configuración de Base de Datos
-
-Describe cómo configurar la base de datos si es necesario. Puede incluir pasos para crear y aplicar migraciones.
-
-```bash
-dotnet ef migrations add Inicial
-dotnet ef database update
-```
 
 ## Ejecución
 
